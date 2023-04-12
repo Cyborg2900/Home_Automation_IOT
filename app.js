@@ -1,20 +1,79 @@
+require('dotenv').config();
+
 const express=require('express');
 
-const path=require('path');
+const bodyParser = require('body-parser');
+
+//db
+const mongoose=require('mongoose')
+const {MongoClient}= require("mongodb");
 
 
+
+//routes
+const users= require('./routes/users');
+const devices=require('./routes/devices');
 
 const app=express();
 
+const PORT=process.env.PORT || 5005;
 
-app.use(express.static(path.join(__dirname,'./front-end-files')));
+
+ const url = process.env.MONGO_URI;
+//const url ='mongodb://localhost:27017/IOT_db2';
+const client = new MongoClient(url);
+
+
+app.use(bodyParser.json());
+app.use('/user',users);
+app.use('/device',devices);
+
+//creating a function to connect to mongodb for cyclic
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+
+
 
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'./front-end-files/login_page.html'));
+    console.log(req.body);
+    console.log(req.params);
+    console.log(req.query);
+    res.send(req.body);
 })
 
 
-app.listen(5005,()=>{
-    console.log('\n\n ----listening to 5005 \n');
+
+
+
+
+
+
+
+
+
+//Connect to the database before listening
+connectDB().then(() => {
+  app.listen(PORT, () => {
+      console.log("listening for requests");
+  })
 })
+
+
+
+// mongoose.connect(url).then(() => {
+
+//     app.listen(PORT, ()=>{
+//         console.log('listening to port');
+//     })
+//   }).catch(error => {
+//     console.error(error);
+//   });
