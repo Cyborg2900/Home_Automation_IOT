@@ -43,11 +43,11 @@ const connectDB = async () => {
 
 
 
-app.get('/',(req,res)=>{
+app.get('/testing',(req,res)=>{
     console.log(req.body);
     console.log(req.params);
     console.log(req.query);
-    res.send(req.body);
+    res.status(200).send('testing complete');
 })
 
 

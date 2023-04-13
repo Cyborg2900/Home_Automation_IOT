@@ -83,7 +83,7 @@ router.route('/api')
           }).then(()=>{ // saving to db
             S_data.save(); // saving the device to the collection
           }).then(()=>{ // saving to db
-            res.send('device added to db'); // sending response back to device for the comfirmation 
+            res.status(200).send('device added to db'); // sending response back to device for the comfirmation 
           }).catch((error) => {
               console.log(error);
               res.send(error);
