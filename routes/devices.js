@@ -65,7 +65,7 @@ router.route('/api')
     })
     .post(async(req,res)=>{
         const{email,id}=req.body;
-
+        console.log(email,id);
         const M_data = new Md_model({ uid:id, email:email });
         const S_data = new Sd_model({ uid:id, email:email });
 
