@@ -15,7 +15,7 @@ router.route('/api')
           const [[S_data],[M_data]]=data;
 
           // checking whether the db and device are synced or not 
-          if(dd1==status_1 && dd2==status_2 && dd3==status_3 && dd4==status_4 ){
+          if(dd1== M_data.status_1 && dd2==M_data.status_2 && dd3==M_data.status_3 && dd4==M_data.status_4 ){
               M_data.sync=true;
 
               S_data.status=ad1;
@@ -69,17 +69,29 @@ router.route('/api')
         const M_data = new Md_model({ uid:id, email:email });
         const S_data = new Sd_model({ uid:id, email:email });
 
-        // adding new device id to the email of user
-        User_model.updateOne({ email:email }, { $push: { s_device: id ,m_device:id } }).then(() => {
-          M_data.save(); // saving the device to the collection
-        }).then(()=>{ // saving to db
-          S_data.save(); // saving the device to the collection
-        }).then(()=>{ // saving to db
-          res.send('device added to db'); // sending response back to device for the comfirmation 
-        }).catch((error) => {
+        Sd_model.find({uid:id}).then((data)=>{
+          if(data !== null){
+            res.send("device already exits in db");
+            return ;
+          }
+
+            // adding new device id to the email of user
+          User_model.updateOne({ email:email }, { $push: { s_device: id ,m_device:id } }).then(() => {
+            M_data.save(); // saving the device to the collection
+          }).then(()=>{ // saving to db
+            S_data.save(); // saving the device to the collection
+          }).then(()=>{ // saving to db
+            res.send('device added to db'); // sending response back to device for the comfirmation 
+          }).catch((error) => {
+              console.log(error);
+              res.send(error);
+            });
+
+
+          }).catch((error)=>{
             console.log(error);
-            res.send(error);
-          });
+            res.send("error");
+          })
 
 
 
