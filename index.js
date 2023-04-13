@@ -58,6 +58,7 @@ app.get('/testing',(req,res)=>{
 
 
 app.get('/',(req,res)=>{
+    console.log(process.env.PORT);
     res.sendFile(path.resolve(__dirname,'./front_end/index.html'));
 })
 app.get('/second',(req,res)=>{
