@@ -58,11 +58,9 @@ app.get('/testing',(req,res)=>{
 
 
 app.get('/',(req,res)=>{
-    console.log(mid_ware);
     res.sendFile(path.resolve(__dirname,'./front_end/index.html'));
 })
 app.get('/second',(req,res)=>{
-  console.log(mid_ware);
   res.sendFile(path.resolve(__dirname,'./front_end/index.html'));
 })
 
