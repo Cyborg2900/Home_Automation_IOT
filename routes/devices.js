@@ -69,8 +69,10 @@ router.route('/api')
         const M_data = new Md_model({ uid:id, email:email });
         const S_data = new Sd_model({ uid:id, email:email });
 
-        Sd_model.find({uid:id}).then((data)=>{
+        // adding device to the email and to the db and checking for any duclicacy of the ids 
+        Sd_model.findOne({uid:id}).then((data)=>{ // check if the device already exits in db or not 
           if(data !== null){
+            console.log(data);
             res.send("device already exits in db");
             return ;
           }
