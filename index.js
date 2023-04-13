@@ -3,6 +3,7 @@ require('dotenv').config();
 const express=require('express');
 
 const bodyParser = require('body-parser');
+const path=require('path');
 
 //db
 const mongoose=require('mongoose')
@@ -27,6 +28,7 @@ const client = new MongoClient(url);
 app.use(bodyParser.json());
 app.use('/user',users);
 app.use('/device',devices);
+app.use(express.static('./front_end'));
 
 //creating a function to connect to mongodb for cyclic
 const connectDB = async () => {
@@ -49,6 +51,15 @@ app.get('/testing',(req,res)=>{
     console.log(req.params);
     console.log(req.query);
     res.status(200).send();
+})
+
+
+
+
+
+app.get('/',(req,res)=>{
+    console.log(mid_ware);
+    res.sendFile(path.resolve(__dirname,'./front_end/index.html'));
 })
 
 
