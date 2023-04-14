@@ -52,7 +52,7 @@ const connectDB = async () => {
 
 
 app.get('/testing',(req,res)=>{
-    console.log(req);
+    //console.log(req);
     console.log(req.body);
     console.log(req.params);
     console.log(req.query);
