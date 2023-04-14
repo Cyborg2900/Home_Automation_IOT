@@ -22,16 +22,16 @@ router.route('/api')
     })
     .post(async (req,res)=>{
         console.log("\n\n\n",req.body);
-        const {email,password}=req.body;
+        // const {email,password}=req.body;
 
 
-        User_model.findOne({email:email}).then((data)=>{
+        User_model.findOne({email:req.body.email}).then((data)=>{
             if(data !==null){       // checking whether a email already exits or not 
                 res.json({"output":'user already exits'})
                 return ;  // getting out of this promise function so that further execution does not happen
             }
 
-            const U_data=new User_model({email:email ,password:password , s_device:[] , m_device:[]});
+            const U_data=new User_model({email:req.body.email ,password:req.body.password , s_device:[] , m_device:[]});
 
             U_data.save().then(()=>{
                 res.send({"output":'user added to db'});
