@@ -47,7 +47,7 @@ router.route('/login')
         const {email,password}=req.body;
 
         User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
-            if(data.password==password){
+            if(data.password === password){
                 const {s_device,m_device}=data;
                 const demo={
                     "name":data.name,
