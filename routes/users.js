@@ -50,7 +50,7 @@ router.route('/login')
             if(data.password==password){
                 const {s_device,m_device}=data;
                 const demo={
-                    "name":data.password,
+                    "name":data.name,
                     "single_device":s_device,
                     "multi_device":m_device,
                 }
