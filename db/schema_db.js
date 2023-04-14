@@ -56,6 +56,10 @@ const user_schema=new mongoose.Schema({
     required : true,
     unique: true,
   },
+  name:{
+    type : String,
+    require : true
+  },
   password: String,
   s_device : [String],
   m_device : [String]

@@ -16,7 +16,7 @@ router.route('/api')
                 return ;  // getting out of this promise function so that further execution does not happen
             }
 
-            const U_data=new User_model({email:req.body.email ,password:req.body.password , s_device:[] , m_device:[]});
+            const U_data=new User_model({email:req.body.email, name : req.body.name ,password:req.body.password, s_device:[] , m_device:[]});
 
             U_data.save().then(()=>{
                 res.send({"output":'user added to db'});
@@ -47,8 +47,17 @@ router.route('/login')
         const {email,password}=req.body;
 
         User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
-            const {s_device,m_device}=data;
-            res.json({s_device,m_device});
+            if(data.password==password){
+                const {s_device,m_device}=data;
+                const demo={
+                    "name":data.password,
+                    "single_device":s_device,
+                    "multi_device":m_device,
+                }
+                res.json(demo);
+            }else{
+                res.json({'output':'wrong password'});
+            }
 
 
         }).catch((error)=>{
