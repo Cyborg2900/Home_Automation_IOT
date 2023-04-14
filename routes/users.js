@@ -7,7 +7,7 @@ const {User_model,Sd_model,Md_model}=require('../db/schema_db');
 router.route('/api')
     .get(async (req,res)=>{
 
-        const {email}=req.body;
+        const {email,password}=req.query;
 
         User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
             const {s_device,m_device}=data;
