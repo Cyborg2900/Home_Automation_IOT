@@ -62,7 +62,7 @@ router.route('/login')
 
         }).catch((error)=>{
             console.log(error);
-            res.send(error);
+            res.json({'output':"email doesn't exists"});
         })
         
     })
