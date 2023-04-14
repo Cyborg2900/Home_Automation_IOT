@@ -5,21 +5,6 @@ const router=express.Router();
 const {User_model,Sd_model,Md_model}=require('../db/schema_db');
 
 router.route('/api')
-    .get(async (req,res)=>{
-
-        const {email,password}=req.query;
-
-        User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
-            const {s_device,m_device}=data;
-            res.json({s_device,m_device});
-
-
-        }).catch((error)=>{
-            console.log(error);
-            res.send(error);
-        })
-        
-    })
     .post(async (req,res)=>{
         console.log("\n\n\n",req.body);
         // const {email,password}=req.body;
@@ -54,6 +39,23 @@ router.route('/device_status')
     })
     .put(async(req,res)=>{
 
+    })
+
+router.route('/login')
+    .post(async (req,res)=>{
+
+        const {email,password}=req.query;
+
+        User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
+            const {s_device,m_device}=data;
+            res.json({s_device,m_device});
+
+
+        }).catch((error)=>{
+            console.log(error);
+            res.send(error);
+        })
+        
     })
 
 
