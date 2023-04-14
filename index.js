@@ -30,7 +30,7 @@ const PORT=process.env.PORT || 5005;
 //const url ='mongodb://localhost:27017/IOT_db2';
 const client = new MongoClient(url);
 
-//app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use('/user',users);
 app.use('/device',devices);
