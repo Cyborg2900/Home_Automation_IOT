@@ -21,7 +21,7 @@ router.route('/api')
         
     })
     .post(async (req,res)=>{
-        //console.log("\n\n\n",req.body);
+        console.log("\n\n\n",req.body);
         const {email,password}=req.body;
 
 
