@@ -44,7 +44,7 @@ router.route('/device_status')
 router.route('/login')
     .post(async (req,res)=>{
 
-        const {email,password}=req.query;
+        const {email,password}=req.body;
 
         User_model.findOne({email:email}).then((data)=>{    // extracting the info of user from db
             const {s_device,m_device}=data;
