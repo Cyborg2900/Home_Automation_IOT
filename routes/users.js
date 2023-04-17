@@ -65,7 +65,7 @@ router.route('/register')
                 res.json({"output":'user already exits'})
                 return ;  // getting out of this promise function so that further execution does not happen
             }
-
+            console.log(req.body.password);
             bcrypt.hash(req.body.password,10).then((hash)=>{
                 console.log(hash);
                 const U_data=new User_model({email:req.body.email, name : req.body.name ,password:hash, s_device:[] , m_device:[]});
