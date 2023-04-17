@@ -73,7 +73,7 @@ router.route('/register')
                     res.send({"output":'user added to db'});
                 }).catch((error)=>{
                     console.log(error)
-                    res.send(error);
+                    res.send({"output":'error occured'});
                 })
             }).catch((error)=>{
                 console.log(error);
