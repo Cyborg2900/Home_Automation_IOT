@@ -59,9 +59,23 @@ router.route('/register')
                 return ;  // getting out of this promise function so that further execution does not happen
             }
             console.log(req.body.password);
-            bcrypt.hash(req.body.password,10).then((hash)=>{
-                console.log(hash);
-                const U_data=new User_model({email:req.body.email, name : req.body.name ,password:hash, s_device:[] , m_device:[]});
+            // bcrypt.hash(req.body.password,10).then((hash)=>{
+            //     console.log(hash);
+            //     const U_data=new User_model({email:req.body.email, name : req.body.name ,password:hash, s_device:[] , m_device:[]});
+
+            //     U_data.save().then(()=>{
+            //         console.log("user added to db");
+            //         res.send({"output":'user added to db'});
+            //     }).catch((error)=>{
+            //         console.log(error)
+            //         res.send({"output":'error occured'});
+            //     })
+            // }).catch((error)=>{
+            //     console.log(error);
+            //     res.send({"output":"error occured"});
+            // })
+
+            const U_data=new User_model({email:req.body.email, name : req.body.name ,password:req.body.password , s_device:[] , m_device:[]});
 
                 U_data.save().then(()=>{
                     console.log("user added to db");
@@ -70,10 +84,6 @@ router.route('/register')
                     console.log(error)
                     res.send({"output":'error occured'});
                 })
-            }).catch((error)=>{
-                console.log(error);
-                res.send({"output":"error occured"});
-            })
 
         }).catch((error)=>{
             console.log('\n\n\n',error);
