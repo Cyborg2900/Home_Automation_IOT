@@ -45,13 +45,6 @@ router.route('/login')
     })
 
 
-router.route('/register')
-    .post(async(req,res)=>{
-        
-    })
-
-
-
 
 router.route('/register')
     .post(async (req,res)=>{
