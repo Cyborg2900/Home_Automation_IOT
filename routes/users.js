@@ -19,7 +19,7 @@ router.route('/login')
                 if(response){
                         const {s_device,m_device}=data;
                         const token = jwt.sign(email, process.env.JWT_SECRET, {
-                            expiresIn: "15m",
+                            expiresIn: "1h",
                           });
                         const demo={
                             "name":data.name,
