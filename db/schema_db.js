@@ -15,7 +15,8 @@ const single_device_schema= new mongoose.Schema({
   },
   email: {
     type: String,
-  }
+  },
+  time:Number
 });
 
 // we would have 4 socket therefore we are having 4 different status for coresponding sockets
@@ -43,10 +44,12 @@ const multi_device_schema= new mongoose.Schema({
   },
 
   email:String,
+  time:Number,
   sync:{
     type: Boolean,
     default: true,
   },
+
 });
 
 
