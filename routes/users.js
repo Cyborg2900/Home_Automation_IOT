@@ -18,9 +18,7 @@ router.route('/login')
             bcrypt.compare(password,data.password).then((response)=>{
                 if(response){
                         const {s_device,m_device}=data;
-                        const token = jwt.sign(email, process.env.JWT_SECRET, {
-                            expiresIn: "1h",
-                          });
+                        const token = jwt.sign(email, process.env.JWT_SECRET );
                         const demo={
                             "name":data.name,
                             "single_device":s_device,
